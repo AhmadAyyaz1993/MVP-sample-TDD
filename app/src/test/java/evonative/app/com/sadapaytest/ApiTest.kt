@@ -65,8 +65,40 @@ class ApiTest {
         Assert.assertNotNull(response.message)
     }
 
+    @Test
+    fun Server_Returning_No_Content_Should_Show_Error() {
+
+        server.enqueue(
+            MockResponse()
+                .setResponseCode(204)
+        )
+        val response = runBlocking { repository.fetchRepos() }
+        val code = response.code
+        Assert.assertTrue(code == 204)
+        Assert.assertNull(response.data)
+        Assert.assertNotNull(response.message)
+
+    }
+
+    @Test
+    fun Server_Returning_Emptyo_Body_Should_Show_Error() {
+
+        server.enqueue(
+            MockResponse()
+                .setResponseCode(123)
+                .setBody("")
+        )
+        val response = runBlocking { repository.fetchRepos() }
+        val code = response.code
+        Assert.assertTrue(code == 200)
+        Assert.assertNull(response.data)
+        Assert.assertNotNull(response.message)
+
+    }
+
     @After
     fun tearDown() {
         server.shutdown()
     }
 }
+

@@ -14,10 +14,16 @@ class ReposRepositroy @Inject constructor(private val api: ReposApi):IReposRepos
             404 -> {
                 return Resource.error("Not Found",response.code() ,null)
             }
+            204 -> {
+                return Resource.error("No content",response.code() ,null)
+            }
             in 500..600 -> {
                 return Resource.error("Internal Server Error", response.code(),null)
             }
-            else -> return if (response.body() == null) {
+            200 -> {
+                return Resource.success(response.body())
+            }
+            else -> return if (response.body() == null || response.body()!!.equals("")) {
                 Resource.error("Server Error",123,null)
             } else {
                 Resource.success(response.body())

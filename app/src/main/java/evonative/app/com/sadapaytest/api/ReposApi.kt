@@ -13,5 +13,5 @@ interface ReposApi {
      * 1. Fetch the repos from endpoint
      * */
     @GET("search/repositories")
-    suspend fun fetchRepos(@Query("repositories") apiKey: String = "language=+sort:stars"): Response<ResponseParent>
+    suspend fun fetchRepos(@Query("repositories") repos: String = "language=+sort:stars"): Response<ResponseParent>
 }
