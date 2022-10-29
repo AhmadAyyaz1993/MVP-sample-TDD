@@ -2,12 +2,10 @@ package evonative.app.com.sadapaytest
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.gson.GsonBuilder
-import com.google.gson.JsonParser
 import evonative.app.com.sadapaytest.api.ReposApi
 import evonative.app.com.sadapaytest.data.repository.ReposRepositroy
 import evonative.app.com.sadapaytest.utils.MockResponseFile
 import kotlinx.coroutines.runBlocking
-import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.*
@@ -81,7 +79,7 @@ class ApiTest {
     }
 
     @Test
-    fun Server_Returning_Emptyo_Body_Should_Show_Error() {
+    fun Server_Returning_Empty_Body_Should_Show_Error() {
 
         server.enqueue(
             MockResponse()
@@ -90,9 +88,63 @@ class ApiTest {
         )
         val response = runBlocking { repository.fetchRepos() }
         val code = response.code
+        Assert.assertTrue(code == 123)
+        Assert.assertNull(response.data)
+        Assert.assertNotNull(response.message)
+
+    }
+
+
+    @Test
+    fun Server_Returning_Success_With_Failure_Message(){
+        mockedResponse = MockResponseFile("reposApi/success_with_failure_message.json").content
+        server.enqueue(
+            MockResponse()
+                .setResponseCode(200)
+                .setBody(mockedResponse)
+        )
+        val response = runBlocking { repository.fetchRepos() }
+        val code = response.code
+
         Assert.assertTrue(code == 200)
         Assert.assertNull(response.data)
         Assert.assertNotNull(response.message)
+
+    }
+
+    @Test
+    fun Server_Returning_Success_With_0_Items(){
+        mockedResponse = MockResponseFile("reposApi/success_With_0_Items.json").content
+        server.enqueue(
+            MockResponse()
+                .setResponseCode(200)
+                .setBody(mockedResponse)
+        )
+        val response = runBlocking { repository.fetchRepos() }
+        val code = response.code
+
+        Assert.assertTrue(code == 200)
+        Assert.assertNotNull(response.data)
+        Assert.assertTrue(response.data!!.total_count == 0)
+        Assert.assertTrue(response.data!!.items.size == 0)
+
+    }
+
+    @Test
+    fun Server_Returning_Success_With_Items_Greater_Than_0(){
+        mockedResponse = MockResponseFile("reposApi/success_Greater_Than_0.json").content
+        server.enqueue(
+            MockResponse()
+                .setResponseCode(200)
+                .setBody(mockedResponse)
+        )
+        val response = runBlocking { repository.fetchRepos() }
+        val code = response.code
+
+        Assert.assertTrue(code == 200)
+        Assert.assertNotNull(response.data)
+        Assert.assertTrue(response.data!!.total_count > 0)
+        Assert.assertTrue(response.data!!.items.size > 0)
 
     }
 

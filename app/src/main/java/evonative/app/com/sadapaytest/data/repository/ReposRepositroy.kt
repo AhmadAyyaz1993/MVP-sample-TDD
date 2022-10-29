@@ -21,7 +21,11 @@ class ReposRepositroy @Inject constructor(private val api: ReposApi):IReposRepos
                 return Resource.error("Internal Server Error", response.code(),null)
             }
             200 -> {
-                return Resource.success(response.body())
+                if (response.body()?.message == null) {
+                    return Resource.success(response.body())
+                } else {
+                    return Resource.error(response.body()?.message!!,200,null)
+                }
             }
             else -> return if (response.body() == null || response.body()!!.equals("")) {
                 Resource.error("Server Error",123,null)
