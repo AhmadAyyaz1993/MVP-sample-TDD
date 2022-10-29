@@ -22,7 +22,7 @@ interface IView:MvpView {
      * The uploaded data is output to the UI.
      * */
     @AddToEndSingle
-    fun addRepos(posts: List<Repo>)
+    fun addRepos(repos: List<Repo>)
 
     /**
      * issue errors to ui

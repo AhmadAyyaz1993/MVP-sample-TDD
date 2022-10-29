@@ -4,7 +4,7 @@ interface IFetchReposPresenter {
     /**
      * The logic that is executed when loading data from the server is performed in this method.
      * */
-    fun loadPost()
+    fun loadRepos()
 
     fun cancel()
 }

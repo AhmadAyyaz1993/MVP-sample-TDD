@@ -10,5 +10,5 @@ import evonative.app.com.sadapaytest.data.repository.ReposRepositroy
 @InstallIn(ActivityComponent::class)
 interface RepositoryModule {
     @Binds
-    fun getRepository(postRepository: ReposRepositroy): IReposRepository
+    fun getRepository(reposRepositroy: ReposRepositroy): IReposRepository
 }

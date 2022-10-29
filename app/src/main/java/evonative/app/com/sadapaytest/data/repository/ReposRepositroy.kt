@@ -9,7 +9,6 @@ import javax.inject.Inject
 class ReposRepositroy @Inject constructor(private val api: ReposApi):IReposRepository {
     override suspend fun fetchRepos(): Resource<ResponseParent> {
         val response = api.fetchRepos()
-
         when (response.code()) {
             404 -> {
                 return Resource.error("Not Found",response.code() ,null)
