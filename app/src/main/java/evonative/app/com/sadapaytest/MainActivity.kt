@@ -51,17 +51,26 @@ class MainActivity : MvpAppCompatActivity(), IView {
         binding.actionMenu.setOnClickListener {
             val popup = PopupMenu(this@MainActivity, binding.actionMenu)
 
-            val nightModeFlags: Int = applicationContext.getResources().getConfiguration().uiMode and
+            val nightModeFlags: Int = MainActivity@this.getResources().getConfiguration().uiMode and
                     Configuration.UI_MODE_NIGHT_MASK
 
+            popup.menu.clear()
+            if(nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+                popup.menu.add("Disable Dard Mode")
+            }else{
                 popup.menu.add("Enable Dard Mode")
+            }
 
             //registering popup with OnMenuItemClickListener
 
             //registering popup with OnMenuItemClickListener
             popup.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
                 override fun onMenuItemClick(item: MenuItem): Boolean {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    if(nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    }else{
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    }
                     return true
                 }
             })
