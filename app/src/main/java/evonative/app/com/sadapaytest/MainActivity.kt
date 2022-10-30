@@ -1,8 +1,13 @@
 package evonative.app.com.sadapaytest
 
-import androidx.appcompat.app.AppCompatActivity
+import android.R
+import android.R.id.button1
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import evonative.app.com.sadapaytest.data.model.Repo
@@ -15,6 +20,7 @@ import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 import javax.inject.Provider
+
 
 @AndroidEntryPoint
 class MainActivity : MvpAppCompatActivity(), IView {
@@ -42,6 +48,25 @@ class MainActivity : MvpAppCompatActivity(), IView {
         adapter = ReposAdapter(this)
 
         initRv()
+
+        binding.actionMenu.setOnClickListener {
+            val popup = PopupMenu(this@MainActivity, binding.actionMenu)
+
+            popup.menu.add("Enable Dard Mode")
+
+            //registering popup with OnMenuItemClickListener
+
+            //registering popup with OnMenuItemClickListener
+            popup.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+                override fun onMenuItemClick(item: MenuItem): Boolean {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    return true
+                }
+            })
+
+            popup.show() //showing popup menu
+
+        }
     }
     private fun initRv() {
         binding.rv.layoutManager = LinearLayoutManager(this)

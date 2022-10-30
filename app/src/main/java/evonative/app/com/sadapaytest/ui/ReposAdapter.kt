@@ -1,9 +1,11 @@
 package evonative.app.com.sadapaytest.ui
 
 import android.content.Context
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import evonative.app.com.sadapaytest.data.model.Repo
@@ -35,7 +37,13 @@ class ReposAdapter(context: Context) : RecyclerView.Adapter<ReposAdapter.PostVH>
     inner class PostVH(private var binding: ItemRepoBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             itemView.apply {
-
+                this.setOnClickListener {
+                    if (binding.collapsable.isVisible){
+                        binding.collapsable.visibility = View.GONE
+                    }else{
+                        binding.collapsable.visibility = View.VISIBLE
+                    }
+                }
             }
         }
 
@@ -44,6 +52,8 @@ class ReposAdapter(context: Context) : RecyclerView.Adapter<ReposAdapter.PostVH>
             binding.repoName.text = posts[adapterPosition].name
             binding.description.text = posts[adapterPosition].description
             Glide.with(context).load(posts[adapterPosition].owner.avatar_url).into(binding.profileImage)
+            binding.tvLanguage.text = posts[adapterPosition].language
+            binding.tvStars.text = posts[adapterPosition].stargazersCount.toString()
         }
     }
     fun RecyclerView.ViewHolder.bindItem(block: View.() -> Unit) = block(itemView)
