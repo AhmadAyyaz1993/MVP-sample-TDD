@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/ivSomethignWentWrong"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:background="@drawable/something_went_wrong"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Something went wrong.."
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="An alien is probably blocking your signal."
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        />
+
+    <Button
+        android:id="@+id/btnRetry"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/transparent_bg_bordered_button"
+        android:text="Retry"
+        android:textColor="@android:color/holo_green_light" />
+</LinearLayout>

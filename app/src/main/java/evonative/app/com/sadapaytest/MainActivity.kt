@@ -1,7 +1,5 @@
 package evonative.app.com.sadapaytest
 
-import android.R
-import android.R.id.button1
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -9,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import evonative.app.com.sadapaytest.data.model.Repo
 import evonative.app.com.sadapaytest.databinding.ActivityMainBinding
@@ -79,15 +78,27 @@ class MainActivity : MvpAppCompatActivity(), IView {
     override fun hideRefresh() {
         binding.shimmerLayout.stopShimmer()
         binding.shimmerLayout.visibility = View.GONE;
+
     }
 
     override fun addRepos(repos: List<Repo>) {
+        binding.somethignWentWrong.root.visibility= View.GONE
+        binding.rv.visibility = View.VISIBLE
         adapter.submitRepo(repos)
     }
 
     override fun onFail() {
         binding.shimmerLayout.stopShimmer()
         binding.shimmerLayout.visibility = View.GONE;
+        binding.somethignWentWrong.root.visibility= View.VISIBLE
+        binding.rv.visibility = View.GONE
+        Glide.with(MainActivity@this).load(R.raw.something_went_wrong).into(binding.somethignWentWrong.ivSomethignWentWrong)
+        binding.somethignWentWrong.btnRetry.setOnClickListener {
+            binding.shimmerLayout.startShimmer()
+            binding.shimmerLayout.visibility = View.VISIBLE;
+            binding.somethignWentWrong.root.visibility= View.GONE
+            reposPresenter.loadRepos()
+        }
     }
 
     override fun showMessage(message: String) {
