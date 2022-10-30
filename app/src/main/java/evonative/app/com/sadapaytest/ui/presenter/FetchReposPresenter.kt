@@ -16,7 +16,7 @@ class FetchReposPresenter @Inject constructor(private var reposRepository: IRepo
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        if (utils.isInternetAvailable()) {
+        if (utils.internetConnectionAvailable(5000)) {
             loadRepos()
         } else
         {

@@ -2,6 +2,7 @@ package evonative.app.com.sadapaytest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import evonative.app.com.sadapaytest.data.model.Repo
@@ -37,7 +38,7 @@ class MainActivity : MvpAppCompatActivity(), IView {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        binding.shimmerLayout.startShimmer()
         adapter = ReposAdapter(this)
 
         initRv()
@@ -47,11 +48,12 @@ class MainActivity : MvpAppCompatActivity(), IView {
         binding.rv.adapter = adapter
     }
     override fun showRefresh() {
-
+        binding.shimmerLayout.startShimmer()
     }
 
     override fun hideRefresh() {
-
+        binding.shimmerLayout.stopShimmer()
+        binding.shimmerLayout.visibility = View.GONE;
     }
 
     override fun addRepos(repos: List<Repo>) {
@@ -59,7 +61,8 @@ class MainActivity : MvpAppCompatActivity(), IView {
     }
 
     override fun onFail() {
-        TODO("Not yet implemented")
+        binding.shimmerLayout.stopShimmer()
+        binding.shimmerLayout.visibility = View.GONE;
     }
 
     override fun showMessage(message: String) {
