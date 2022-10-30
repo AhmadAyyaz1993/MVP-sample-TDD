@@ -1,9 +1,9 @@
 package evonative.app.com.sadapaytest
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,7 +51,10 @@ class MainActivity : MvpAppCompatActivity(), IView {
         binding.actionMenu.setOnClickListener {
             val popup = PopupMenu(this@MainActivity, binding.actionMenu)
 
-            popup.menu.add("Enable Dard Mode")
+            val nightModeFlags: Int = applicationContext.getResources().getConfiguration().uiMode and
+                    Configuration.UI_MODE_NIGHT_MASK
+
+                popup.menu.add("Enable Dard Mode")
 
             //registering popup with OnMenuItemClickListener
 

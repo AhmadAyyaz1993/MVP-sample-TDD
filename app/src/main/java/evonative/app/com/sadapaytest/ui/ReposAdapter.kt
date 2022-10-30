@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import evonative.app.com.sadapaytest.data.model.Repo
 import evonative.app.com.sadapaytest.databinding.ItemRepoBinding
+import evonative.app.com.sadapaytest.utils
 
 class ReposAdapter(context: Context) : RecyclerView.Adapter<ReposAdapter.PostVH>() {
 
@@ -53,7 +54,7 @@ class ReposAdapter(context: Context) : RecyclerView.Adapter<ReposAdapter.PostVH>
             binding.description.text = posts[adapterPosition].description
             Glide.with(context).load(posts[adapterPosition].owner.avatar_url).into(binding.profileImage)
             binding.tvLanguage.text = posts[adapterPosition].language
-            binding.tvStars.text = posts[adapterPosition].stargazersCount.toString()
+            binding.tvStars.text = utils.prettyCount(posts[adapterPosition].stargazersCount)
         }
     }
     fun RecyclerView.ViewHolder.bindItem(block: View.() -> Unit) = block(itemView)

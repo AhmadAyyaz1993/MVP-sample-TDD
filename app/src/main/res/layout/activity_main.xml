@@ -25,7 +25,6 @@
             android:layout_marginLeft="30dp"
             android:layout_weight="0.90"
             android:textSize="30dp"
-            android:textColor="@color/black"
             />
         <ImageView
             android:id="@+id/action_menu"
