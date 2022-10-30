@@ -12,5 +12,7 @@ data class Repo(
     @SerializedName("stargazers_count")
     val stargazersCount: Int,
     @SerializedName("owner")
-    val owner: RepoOwner
+    val owner: RepoOwner,
+    @SerializedName("description")
+    val description: String
 )

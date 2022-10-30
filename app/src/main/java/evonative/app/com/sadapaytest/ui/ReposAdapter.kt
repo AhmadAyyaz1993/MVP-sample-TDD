@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import evonative.app.com.sadapaytest.data.model.Repo
 import evonative.app.com.sadapaytest.databinding.ItemRepoBinding
 
@@ -39,8 +40,10 @@ class ReposAdapter(context: Context) : RecyclerView.Adapter<ReposAdapter.PostVH>
         }
 
         fun bind() = bindItem {
-            binding.title.text = posts[adapterPosition].name
-            binding.description.text = posts[adapterPosition].language
+            binding.ownerName.text = posts[adapterPosition].owner.login
+            binding.repoName.text = posts[adapterPosition].name
+            binding.description.text = posts[adapterPosition].description
+            Glide.with(context).load(posts[adapterPosition].owner.avatar_url).into(binding.profileImage)
         }
     }
     fun RecyclerView.ViewHolder.bindItem(block: View.() -> Unit) = block(itemView)
