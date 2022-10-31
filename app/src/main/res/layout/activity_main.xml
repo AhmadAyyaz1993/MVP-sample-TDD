@@ -13,14 +13,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:weightSum="1"
         android:orientation="horizontal">
         <TextView
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:text="Trending"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:textStyle="bold"
             android:layout_marginLeft="30dp"
             android:layout_weight="0.90"
@@ -28,10 +28,11 @@
             />
         <ImageView
             android:id="@+id/action_menu"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
+
             android:layout_weight="0.10"
-            android:src="@drawable/menu"
+            android:src="@drawable/outline_more_vert"
             />
     </LinearLayout>
     <View

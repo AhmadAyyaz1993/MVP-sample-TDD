@@ -1,5 +1,8 @@
 # SadaPayTest
 
+### Note: 
+Please checkout the master branch for the code
+
 I have built this project using MVP architecture and tried to keep it simple and clean. There are few of the libraries I have mentioned below that I have used to achieve different purposes in the app. I have also implemented some unit tests for the business logic in the app for the api call that's been used to fetch the trending repos from the remote data source. 
 
 Some important external libraries/dependencies that I have used in the app are as follows:
